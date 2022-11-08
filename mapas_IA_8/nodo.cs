@@ -9,8 +9,8 @@
         //public Stack<(nodo e, int distancia)> listaJson { get; set; } = new Stack<(nodo e, int distancia)>();
         public static void SetVecinos(nodo inicio, nodo fin, int distancia)
         {
-            inicio.vecinos.Add(inicio, distancia);
-            fin.vecinos.Add(fin, distancia);
+            inicio.vecinos.Add(fin, distancia);
+            fin.vecinos.Add(inicio, distancia);
         }
 
         public IEnumerable<(nodo, nodo, int)> busquedaProfundidad()
