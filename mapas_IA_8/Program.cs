@@ -4,6 +4,9 @@ using mapas_IA_8;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Net.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +31,7 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
 
 app.MapGet("/weatherforecast", () =>
 {
@@ -87,6 +91,27 @@ app.MapGet("/weatherforecast", () =>
 
     var jsonString = JsonSerializer.Serialize(ser); 
     Console.WriteLine(jsonString);
+    JSONParser json = new JSONParser(jsonString);
+    /*
+    try
+    {
+        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5173/");
+        httpWebRequest.Method = "POST";
+
+        httpWebRequest.ContentType = "application/json";
+
+        using (var stream = new StreamWriter(httpWebRequest.GetRequestStream()))
+        {
+            stream.WriteAsync(jsonString.ToString());
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }*/
+
+
+
 
 })
 .WithName("GetWeatherForecast");
@@ -97,4 +122,6 @@ internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+
 
