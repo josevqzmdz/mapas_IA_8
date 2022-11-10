@@ -84,14 +84,10 @@ app.MapGet("/weatherforecast", () =>
                 distancia = eje.Item3
             }
         );
-    foreach (var n in aquila.busquedaProfundidad())
-    {
-        Console.WriteLine($"De {n.Item1.nombre} hasta {n.Item2.nombre} : {n.Item3}");     
-    }
-
-    var jsonString = JsonSerializer.Serialize(ser); 
-    Console.WriteLine(jsonString);
-    JSONParser json = new JSONParser(jsonString);
+    
+    //Console.WriteLine(jsonString);
+    JSONParser json = new JSONParser(ser);
+    json.postHtml();
     /*
     try
     {
