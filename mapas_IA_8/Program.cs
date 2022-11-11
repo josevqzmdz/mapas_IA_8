@@ -6,8 +6,8 @@ using System.Text.Json.Serialization;
 using Microsoft.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-
-
+using System.Web.Http.Cors;
+using System.Web.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,9 +33,11 @@ var summaries = new[]
 };
 
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherforecast", (string origin) =>
 {
-    mapas_IA_8.nodo aquila = new mapas_IA_8.nodo("aquila");
+    try
+    {
+        mapas_IA_8.nodo aquila = new mapas_IA_8.nodo("aquila");
     mapas_IA_8.nodo maruata = new mapas_IA_8.nodo("maruata");
     mapas_IA_8.nodo tepalcatepec = new mapas_IA_8.nodo("tepalcatepec");
     mapas_IA_8.nodo apatzingan = new mapas_IA_8.nodo("apatzingan");
@@ -69,48 +71,64 @@ app.MapGet("/weatherforecast", () =>
     mapas_IA_8.nodo.SetVecinos(patzcuaro, morelia, 2); //
     mapas_IA_8.nodo.SetVecinos(morelia, cd_hidalgo, 3); //
 
-    //mapas_IA_8.JSONParser json = new mapas_IA_8.JSONParser(aquila.busquedaProfundidad());
-    //return json.jsonString;
-    string[] lista = new string[100];
-    int e = 0;
+    // maldito CORS
+    string _MyCors = "MyCors";
+    string url = "http://127.0.0.1:5173/";
 
-    //var jsonString = JsonSerializer.Serialize(recorrido.Select(x => new { x.Item1, x.Item2, x.Item3 }));
-    // https://stackoverflow.com/questions/1619518/a-dictionary-where-value-is-an-anonymous-type-in-c-sharp
-    var ser = aquila.busquedaProfundidad().Select(
-            eje => new
-            {
-                inicio = eje.Item1.nombre,
-                fin = eje.Item2.nombre,
-                distancia = eje.Item3
-            }
-        );
-    
-    //Console.WriteLine(jsonString);
-    JSONParser json = new JSONParser(ser);
-    json.postHtml();
-    /*
-    try
+    // https://www.youtube.com/watch?v=KK7fJTXxeeE
+    IServiceCollection services = new ServiceCollection();
+    services.AddCors(options =>
     {
-        var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5173/");
-        httpWebRequest.Method = "POST";
-
-        httpWebRequest.ContentType = "application/json";
-
-        using (var stream = new StreamWriter(httpWebRequest.GetRequestStream()))
+        options.AddPolicy(name: _MyCors, builder =>
         {
-            stream.WriteAsync(jsonString.ToString());
-        }
+            builder.AllowAnyOrigin();
+            builder.AllowAnyMethod();
+            builder.AllowAnyHeader();
+        });
+    });
+
+    app.UseCors(_MyCors);
+
+    List<mapas_IA_8.nodo> list = new List<mapas_IA_8.nodo>
+       {
+        aquila, maruata, tepalcatepec, apatzingan, nueva_italia, lazaro_cardenas, los_reyes, uruapan, 
+        sahuayo, zamora, zacapu, patzcuaro, morelia, cd_hidalgo,
+       };
+
+    
+        // https://learn.microsoft.com/en-us/previous-versions/aspnet/hh833997(v=vs.118)
+        // https://stackoverflow.com/questions/27504256/mvc-web-api-no-access-control-allow-origin-header-is-present-on-the-requested
+        HttpConfiguration config = new HttpConfiguration();
+        var cors = new EnableCorsAttribute(url, "*", "*");
+        config.EnableCors(cors);
+
+        foreach (var ciudad in list)
+        {
+            if (origin.ToString() == ciudad.nombre)
+            {
+                //https://stackoverflow.com/questions/1619518/a-dictionary-where-value-is-an-anonymous-type-in-c-sharp
+
+                var city = ciudad.busquedaProfundidad().Select(
+                    eje => new
+                    {
+                        weight = eje.Item3,
+                        id = eje.Item1.nombre + " " + eje.Item2.nombre
+                    });
+                return city;
+            }
+        }// fin foreach
     }
-    catch (Exception e)
+    catch(Exception e)
     {
-        Console.WriteLine(e.Message);
-    }*/
+        Console.WriteLine(e.ToString());
+    }
+    
 
-
-
-
+    //JSONParser json = new JSONParser(ser);
+    //json.postHtml();
+    return null;
 })
-.WithName("GetWeatherForecast");
+.WithName("mapas");
 
 app.Run();
 

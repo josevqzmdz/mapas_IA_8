@@ -34,7 +34,11 @@
                 {
                     if (!nodosRecorridos.Contains(vecino.Key))
                     {
-                        stack.Push((vecino.Key, vecino.Value + vertice.distancia));
+                        // este codigo suma las vertices
+                        // sin embargo, el codigo de javascript ya lo hace por su cuenta
+                        // lo dejare aqui solo para fines de documentacion
+                         stack.Push((vecino.Key, vecino.Value + vertice.distancia));
+                        // stack.Push((vecino.Key, vertice.distancia));
                     }
                 }
             }
