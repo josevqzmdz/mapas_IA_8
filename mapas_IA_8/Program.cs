@@ -73,21 +73,31 @@ app.MapGet("/weatherforecast", (string origin) =>
 
     // maldito CORS
     string _MyCors = "MyCors";
-    string url = "http://127.0.0.1:5173/";
+        // detalle: CORS no admite un slash (/) al final de la url
+    string url = "http://127.0.0.1:5173";
 
-    // https://www.youtube.com/watch?v=KK7fJTXxeeE
-    IServiceCollection services = new ServiceCollection();
-    services.AddCors(options =>
+        // https://www.youtube.com/watch?v=KK7fJTXxeeE
+        //IServiceCollection services = new ServiceCollection();
+    var builder = WebApplication.CreateBuilder(args);
+    builder.Services.AddCors(options =>
     {
         options.AddPolicy(name: _MyCors, builder =>
         {
-            builder.AllowAnyOrigin();
+            builder.WithOrigins(url);
             builder.AllowAnyMethod();
             builder.AllowAnyHeader();
         });
     });
 
-    app.UseCors(_MyCors);
+        builder.Services.AddControllers();
+
+        var app = builder.Build();
+        app.UseHttpsRedirection();
+        app.UseStaticFiles();
+        app.UseRouting();
+
+
+        app.UseCors(_MyCors);
 
     List<mapas_IA_8.nodo> list = new List<mapas_IA_8.nodo>
        {

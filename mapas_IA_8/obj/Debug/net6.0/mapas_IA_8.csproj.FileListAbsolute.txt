@@ -35,3 +35,5 @@ C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\
 C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\mapas_IA_8\bin\Debug\net6.0\System.Web.Http.Cors.dll
 C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\mapas_IA_8\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\mapas_IA_8\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\mapas_IA_8\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Jose Miguel\Documents\9o\Inteligencia artificial\2o_parcial\mapas_IA_8\mapas_IA_8\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
