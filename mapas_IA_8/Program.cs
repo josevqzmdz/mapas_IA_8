@@ -105,13 +105,6 @@ app.MapGet("/weatherforecast", (string origin) =>
         sahuayo, zamora, zacapu, patzcuaro, morelia, cd_hidalgo,
        };
 
-    
-        // https://learn.microsoft.com/en-us/previous-versions/aspnet/hh833997(v=vs.118)
-        // https://stackoverflow.com/questions/27504256/mvc-web-api-no-access-control-allow-origin-header-is-present-on-the-requested
-        HttpConfiguration config = new HttpConfiguration();
-        var cors = new EnableCorsAttribute(url, "*", "*");
-        config.EnableCors(cors);
-
         foreach (var ciudad in list)
         {
             if (origin.ToString() == ciudad.nombre)
@@ -133,9 +126,6 @@ app.MapGet("/weatherforecast", (string origin) =>
         Console.WriteLine(e.ToString());
     }
     
-
-    //JSONParser json = new JSONParser(ser);
-    //json.postHtml();
     return null;
 })
 .WithName("mapas");
