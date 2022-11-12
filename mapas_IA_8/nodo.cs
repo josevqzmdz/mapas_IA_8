@@ -30,6 +30,7 @@
                 }
                 nodosRecorridos.Add(vertice.n);
 
+                /*
                 foreach (var vecino in vertice.n.vecinos)
                 {
                     if (!nodosRecorridos.Contains(vecino.Key))
@@ -39,6 +40,16 @@
                         // lo dejare aqui solo para fines de documentacion
                          stack.Push((vecino.Key, vecino.Value + vertice.distancia));
                         // stack.Push((vecino.Key, vertice.distancia));
+                    }
+                }
+                */
+
+                foreach (var vecino in vertice.Item1.vecinos)
+                {
+                    if (!nodosRecorridos.Contains(vecino.Key))
+                    {
+                        stack.Push((vecino.Key, vecino.Value + vertice.distancia));
+                        yield return (vertice.n, vecino.Key, vecino.Value + vertice.distancia);
                     }
                 }
             }
