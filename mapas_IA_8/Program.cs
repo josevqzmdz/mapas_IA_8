@@ -41,16 +41,16 @@ app.MapGet("/weatherforecast", (string origin) =>
         mapas_IA_8.nodo maruata = new mapas_IA_8.nodo("maruata");
         mapas_IA_8.nodo tepalcatepec = new mapas_IA_8.nodo("tepalcatepec");
         mapas_IA_8.nodo apatzingan = new mapas_IA_8.nodo("apatzingan");
-        mapas_IA_8.nodo nueva_italia = new mapas_IA_8.nodo("nueva_italia");
-        mapas_IA_8.nodo lazaro_cardenas = new mapas_IA_8.nodo("lazaro_cardenas");
-        mapas_IA_8.nodo los_reyes = new mapas_IA_8.nodo("los_reyes");
+        mapas_IA_8.nodo nueva_italia = new mapas_IA_8.nodo("nuevaitalia");
+        mapas_IA_8.nodo lazaro_cardenas = new mapas_IA_8.nodo("lazarocardenas");
+        mapas_IA_8.nodo los_reyes = new mapas_IA_8.nodo("losreyes");
         mapas_IA_8.nodo uruapan = new mapas_IA_8.nodo("uruapan");
         mapas_IA_8.nodo sahuayo = new mapas_IA_8.nodo("sahuayo");
         mapas_IA_8.nodo zamora = new mapas_IA_8.nodo("zamora");
         mapas_IA_8.nodo zacapu = new mapas_IA_8.nodo("zacapu");
         mapas_IA_8.nodo patzcuaro = new mapas_IA_8.nodo("patzcuaro");
         mapas_IA_8.nodo morelia = new mapas_IA_8.nodo("morelia");
-        mapas_IA_8.nodo cd_hidalgo = new mapas_IA_8.nodo("ciudad_hidalgo");
+        mapas_IA_8.nodo cd_hidalgo = new mapas_IA_8.nodo("ciudadhidalgo");
 
         mapas_IA_8.nodo.SetVecinos(aquila, maruata, 2); //
         mapas_IA_8.nodo.SetVecinos(aquila, tepalcatepec, 3); //
