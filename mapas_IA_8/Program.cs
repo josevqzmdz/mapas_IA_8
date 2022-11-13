@@ -129,7 +129,7 @@ app.MapGet("/weatherforecast", (string origin) =>
                         eje => new
                         {
                             weight = eje.Item3,
-                            id = $"{eje.Item1.nombre}" + " " + $"{eje.Item2.nombre}"
+                            id = $"{eje.Item1.nombre}" + "_" + $"{eje.Item2.nombre}"
                         });
                     string jsonString = JsonSerializer.Serialize(cityJson);
                     Console.WriteLine(jsonString);
